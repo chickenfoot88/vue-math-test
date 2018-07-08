@@ -1,8 +1,8 @@
 <template>
-  <div class="alert alert-secondary">
-    <h3>Are you ready?</h3>
-    <button @click="$emit('onStart')" type="button" class="btn btn-success">Start</button>
-  </div>
+	<div class="alert alert-secondary">
+		<h3>Are you ready?</h3>
+		<button @click="$emit('onStart')" type="button" class="btn btn-success">Start</button>
+	</div>
 </template>
 
 <script>

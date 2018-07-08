@@ -1,8 +1,8 @@
 <template>
   <div class="training">
     <h1>Math training. Level {{ level + 1 }}</h1>
-    <hr>
 
+		<hr>
     <div class="progress">
       <div class="progress-bar" :style="progressStyles"></div>
     </div>
@@ -15,7 +15,6 @@
           v-if="state == 'start'"
           @onStart="onStart"
         >
-
         </app-start-screen>
 
         <app-question
@@ -41,6 +40,8 @@
           @nextLevel="onNextLevel"
           :level="level"
           :levels="levels"
+					:questMax="questMax"
+					:totalStats="totalStats"
         >
         </app-result-screen>
 
@@ -55,7 +56,6 @@
 
 <script>
 export default {
-  name: 'app',
   data () {
     return {
       state: 'start',
@@ -63,6 +63,10 @@ export default {
         success: 0,
         error: 0
       },
+			totalStats: {
+				success: 0,
+				error: 0
+			},
       message: {
         type: '',
         text: ''
@@ -120,7 +124,13 @@ export default {
       this.stats.error++;
     },
     onNext(){
-      this.questDone < this.questMax ? this.state = 'question' : this.state = 'result';
+      if (this.questDone < this.questMax) {
+				this.state = 'question';
+			} else {
+				this.totalStats.success += this.stats.success;
+				this.totalStats.error += this.stats.error;
+				this.state = 'result';
+			}
     },
     onNextLevel(){
       this.level++;
@@ -141,6 +151,7 @@ export default {
     margin-bottom: 20px;
   }
 
+	/* Анимация переключения компонента Question */
   .flip-enter {
 
   }

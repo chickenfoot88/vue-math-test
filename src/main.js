@@ -12,6 +12,6 @@ Vue.component('AppResultScreen', AppResultScreen);
 Vue.component('AppStartScreen', AppStartScreen);
 
 new Vue({
-  el: '#app',
-  render: h => h(App)
+	el: '#app',
+	render: h => h(App)
 })
